@@ -1,6 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { User } from '@interfaces/users.interface';
+import { AdEntity } from './ads.entity';
 
 @Entity()
 export class UserEntity extends BaseEntity implements User {
@@ -15,6 +16,9 @@ export class UserEntity extends BaseEntity implements User {
   @Column()
   @IsNotEmpty()
   password: string;
+
+  @OneToMany(() => AdEntity, (ad) => ad.user)
+  ads: AdEntity[]
 
   @Column()
   @CreateDateColumn()
