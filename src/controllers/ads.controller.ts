@@ -7,7 +7,7 @@ import { Ad } from '@/interfaces/ads.interface';
 class AdsController {
     public adsService = new AdsService()
 
-    public getUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    public getAds = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
           const findAllAdsData: Ad[] = await this.adsService.findAllAds();
     
@@ -16,6 +16,19 @@ class AdsController {
           next(error);
         }
       };
+
+
+      public getAdById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+          const adId = Number(req.params.id);
+          const findOneAdData: Ad = await this.adsService.findAdById(adId);
+    
+          res.status(200).json({ data: findOneAdData, message: 'findOne' });
+        } catch (error) {
+          next(error);
+        }
+      };
+    
 
 
 }
