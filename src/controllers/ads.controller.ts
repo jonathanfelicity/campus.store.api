@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 // import { CreateAdDto } from '@/exceptions/dtos/ads.dto';
 import AdsService from '@/services/ads.service';
 import { Ad } from '@/interfaces/ads.interface';
+import { CreateAdDto } from '@/exceptions/dtos/ads.dto';
 
 
 class AdsController {
@@ -28,6 +29,19 @@ class AdsController {
           next(error);
         }
       };
+
+
+      public createAd = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+          const adData: CreateAdDto = req.body;
+          const createAdData: Ad = await this.adsService.createAd(adData);
+    
+          res.status(201).json({ data: createAdData, message: 'created' });
+        } catch (error) {
+          next(error);
+        }
+      };
+      
     
 
 

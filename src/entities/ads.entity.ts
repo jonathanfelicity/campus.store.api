@@ -1,6 +1,6 @@
 import { isNotEmpty, IsNotEmpty } from 'class-validator';
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
-import { Ad } from "@/interfaces/Ad";
+import { Ad } from '@/interfaces/ads.interface';
 import { UserEntity } from './users.entity';
 
 @Entity()

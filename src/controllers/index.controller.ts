@@ -3,7 +3,9 @@ import { NextFunction, Request, Response } from 'express';
 class IndexController {
   public index = (req: Request, res: Response, next: NextFunction): void => {
     try {
-      res.sendStatus(200);
+      res.json({
+        "msg":"welcome to campus store api v1"
+      });
     } catch (error) {
       next(error);
     }
