@@ -1,0 +1,30 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build app
+        run: npm run build
+
+      - name: Deploy to cPanel
+        uses: easingthemes/cpanel-deploy@v2.0.0
+        with:
+          cpanel_url: ${{ secrets.CPANEL_URL }}
+          cpanel_username: ${{ secrets.CPANEL_USERNAME }}
+          cpanel_password: ${{ secrets.CPANEL_PASSWORD }}
+          ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_host: ${{ secrets.SSH_HOST }}
+          ssh_port: ${{ secrets.SSH_PORT }}
+          app_path: ${{ secrets.APP_PATH }}
